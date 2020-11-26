@@ -1,13 +1,13 @@
 //
-//  TodayTableController.swift
+//  CreateTableController.swift
 //  Essence
 //
-//  Created by Cole Riggle on 11/24/20.
+//  Created by Cole Riggle on 11/26/20.
 //
 
 import UIKit
 
-class TodayTableController: UITableViewController {
+class CreateTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,21 +19,19 @@ class TodayTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: EssenceCell
+        var cell = EssenceCell()
         
         if indexPath.row == 0 {
-            cell = TodayCreateCategoryCell()
+            cell = CreateNewCategoryCell()
         } else if indexPath.row == 1 {
             let divider = DividerCell()
-            divider.backgroundColor = .clear
-            divider.message = "Or select a category"
+            divider.message = "Or choose an exisiting category"
             cell = divider
         } else {
-            cell = TodayCategoryCell()
+            
         }
-
-        cell.backgroundColor = .clear // Needed when insetting the cell's frame in layoutSubviews()
         
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -42,12 +40,12 @@ class TodayTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.row == 0) {
-            return 180.0
+            return 80.0
         } else if (indexPath.row == 1) {
             return 50.0
         } else {

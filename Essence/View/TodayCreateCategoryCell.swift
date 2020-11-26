@@ -7,22 +7,31 @@
 
 import UIKit
 
-class TodayCreateCategoryCell: TodayCell {
+class TodayCreateCategoryCell: EssenceCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    let notesDueLabel: UILabel = {
+    var notesDue: Int = 0 {
+        didSet {
+            if notesDue == 1 {
+                notesDueLabel.text = "1 Note Due"
+            } else {
+                notesDueLabel.text = "\(notesDue) Notes Due"
+            }
+        }
+    }
+    
+    fileprivate let notesDueLabel: UILabel = {
         let label = UILabel()
-        label.text = "7 Notes Due"
         label.font = .systemFont(ofSize: 45)
         label.textAlignment = .center
         label.textColor = UIColor.Application.General.primaryText
         return label
     }()
     
-    let reviewAllButton: UIButton = {
+    fileprivate let reviewAllButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .systemBlue
         button.setTitle("Review All", for: .normal)
@@ -35,6 +44,8 @@ class TodayCreateCategoryCell: TodayCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        notesDue = 5
         
         let stackView = UIStackView(arrangedSubviews: [notesDueLabel, reviewAllButton])
         stackView.axis = .vertical

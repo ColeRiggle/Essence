@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodayCell: UITableViewCell {
+class EssenceCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
