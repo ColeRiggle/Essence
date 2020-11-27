@@ -28,7 +28,8 @@ class CreateTableController: UITableViewController {
             divider.message = "Or choose an exisiting category"
             cell = divider
         } else {
-            
+            let category = CreateCategoryCell()
+            cell = category
         }
         
         cell.backgroundColor = .clear
@@ -40,7 +41,7 @@ class CreateTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -49,7 +50,7 @@ class CreateTableController: UITableViewController {
         } else if (indexPath.row == 1) {
             return 50.0
         } else {
-            return 120.0
+            return 100.0
         }
     }
 }

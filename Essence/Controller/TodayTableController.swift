@@ -51,7 +51,7 @@ class TodayTableController: UITableViewController {
         } else if (indexPath.row == 1) {
             return 50.0
         } else {
-            return 120.0
+            return 100.0
         }
     }
 }

@@ -1,13 +1,13 @@
 //
-//  TodayCategoryCell.swift
+//  CreateCategoryCell.swift
 //  Essence
 //
-//  Created by Cole Riggle on 11/24/20.
+//  Created by Cole Riggle on 11/26/20.
 //
 
 import UIKit
 
-class TodayCategoryCell: EssenceCell {
+class CreateCategoryCell: EssenceCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,21 +22,12 @@ class TodayCategoryCell: EssenceCell {
         return label
     }()
     
-    let lastStudiedLabel: UILabel = {
+    let cardCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "Last studied 4 days ago"
+        label.text = "22 cards"
         label.font = .systemFont(ofSize: 24)
         label.textAlignment = .left
         label.textColor = UIColor.Application.General.secondaryText
-        return label
-    }()
-    
-    let reviewCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "6"
-        label.font = .systemFont(ofSize: 56)
-        label.textAlignment = .left
-        label.textColor = .systemRed
         return label
     }()
     
@@ -47,7 +38,7 @@ class TodayCategoryCell: EssenceCell {
         
         let stackView = UIStackView(arrangedSubviews: [
             nameLabel,
-            lastStudiedLabel
+            cardCountLabel
         ])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
@@ -55,9 +46,6 @@ class TodayCategoryCell: EssenceCell {
         
         contentView.addSubview(stackView)
         stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: .init(top: 8, left: 12, bottom: 6, right: 0))
-        
-        contentView.addSubview(reviewCountLabel)
-        reviewCountLabel.anchor(top: contentView.topAnchor, leading: nil, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 12))
     }
     
     required init?(coder: NSCoder) {
