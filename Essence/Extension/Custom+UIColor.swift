@@ -18,6 +18,8 @@ extension UIColor {
             static let primaryText = #colorLiteral(red: 0.9180622697, green: 0.918194294, blue: 0.918033421, alpha: 1)
             static let secondaryText = #colorLiteral(red: 0.6436498165, green: 0.6437445879, blue: 0.6436290741, alpha: 1)
             
+            static let navigationTint = UIColor.systemRed
+            
         }
         
         struct Divider {

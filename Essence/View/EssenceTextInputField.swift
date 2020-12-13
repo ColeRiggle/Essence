@@ -7,7 +7,13 @@
 
 import UIKit
 
-class EssenceInputView: UIView {
+protocol EssenceInputFieldDelegate {
+    func textFieldClicked(textField: UITextField)
+}
+
+class EssenceTextInputField: UIView {
+    
+    var delegate: EssenceInputFieldDelegate?
     
     var title: String? {
         didSet {
@@ -52,6 +58,11 @@ class EssenceInputView: UIView {
         
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 0, left: Formatting.sideInset, bottom: 0, right: Formatting.sideInset))
+        
+        textField.addTarget(self, action: #selector(textFieldClicked), for: .touchDown);
     }
     
+    @objc fileprivate func textFieldClicked() {
+        delegate?.textFieldClicked(textField: textField)
+    }
 }

@@ -18,19 +18,20 @@
 		D63F9344254CDE91006249F6 /* Firebase+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63F9342254CDE91006249F6 /* Firebase+Utils.swift */; };
 		D6610732256D78A50004A5F4 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610731256D78A50004A5F4 /* BaseTabBarController.swift */; };
 		D661073A256D7D530004A5F4 /* TodayTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610739256D7D530004A5F4 /* TodayTableController.swift */; };
-		D661073F256D7E830004A5F4 /* Custon+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661073E256D7E830004A5F4 /* Custon+UIColor.swift */; };
+		D661073F256D7E830004A5F4 /* Custom+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661073E256D7E830004A5F4 /* Custom+UIColor.swift */; };
 		D6610744256D80030004A5F4 /* TodayCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610743256D80030004A5F4 /* TodayCategoryCell.swift */; };
 		D6610749256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610748256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift */; };
 		D661074E256D8A9E0004A5F4 /* EssenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661074D256D8A9E0004A5F4 /* EssenceCell.swift */; };
 		D6610756256D90AE0004A5F4 /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610755256D90AE0004A5F4 /* DividerCell.swift */; };
-		D661076125701FDB0004A5F4 /* CreateTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661076025701FDB0004A5F4 /* CreateTableController.swift */; };
+		D661076125701FDB0004A5F4 /* SelectCategoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */; };
 		D6610766257023320004A5F4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610765257023320004A5F4 /* Category.swift */; };
 		D661076B257024460004A5F4 /* CreateNewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661076A257024460004A5F4 /* CreateNewCategoryCell.swift */; };
 		D6610773257029800004A5F4 /* CreateCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610772257029800004A5F4 /* CreateCategoryCell.swift */; };
-		D661077B25702C020004A5F4 /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077A25702C020004A5F4 /* CreateCategoryController.swift */; };
-		D661078025702C940004A5F4 /* EssenceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceInputView.swift */; };
+		D661077B25702C020004A5F4 /* CreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077A25702C020004A5F4 /* CreateController.swift */; };
+		D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceTextInputField.swift */; };
 		D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610784257032FA0004A5F4 /* InsetTextField.swift */; };
 		D661078D257033820004A5F4 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661078C257033820004A5F4 /* Formatting.swift */; };
+		D6FCAB292585BC5F00F90F41 /* EssenceTextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceTextInputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,17 +69,17 @@
 		D63F9342254CDE91006249F6 /* Firebase+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+Utils.swift"; sourceTree = "<group>"; };
 		D6610731256D78A50004A5F4 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		D6610739256D7D530004A5F4 /* TodayTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableController.swift; sourceTree = "<group>"; };
-		D661073E256D7E830004A5F4 /* Custon+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custon+UIColor.swift"; sourceTree = "<group>"; };
+		D661073E256D7E830004A5F4 /* Custom+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+UIColor.swift"; sourceTree = "<group>"; };
 		D6610743256D80030004A5F4 /* TodayCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCategoryCell.swift; sourceTree = "<group>"; };
 		D6610748256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCreateCategoryCell.swift; sourceTree = "<group>"; };
 		D661074D256D8A9E0004A5F4 /* EssenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceCell.swift; sourceTree = "<group>"; };
 		D6610755256D90AE0004A5F4 /* DividerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
-		D661076025701FDB0004A5F4 /* CreateTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTableController.swift; sourceTree = "<group>"; };
+		D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableController.swift; sourceTree = "<group>"; };
 		D6610765257023320004A5F4 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D661076A257024460004A5F4 /* CreateNewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewCategoryCell.swift; sourceTree = "<group>"; };
 		D6610772257029800004A5F4 /* CreateCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryCell.swift; sourceTree = "<group>"; };
-		D661077A25702C020004A5F4 /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
-		D661077F25702C940004A5F4 /* EssenceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceInputView.swift; sourceTree = "<group>"; };
+		D661077A25702C020004A5F4 /* CreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateController.swift; sourceTree = "<group>"; };
+		D661077F25702C940004A5F4 /* EssenceTextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceTextInputField.swift; sourceTree = "<group>"; };
 		D6610784257032FA0004A5F4 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		D661078C257033820004A5F4 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,7 +182,7 @@
 				D6610743256D80030004A5F4 /* TodayCategoryCell.swift */,
 				D661076A257024460004A5F4 /* CreateNewCategoryCell.swift */,
 				D6610772257029800004A5F4 /* CreateCategoryCell.swift */,
-				D661077F25702C940004A5F4 /* EssenceInputView.swift */,
+				D661077F25702C940004A5F4 /* EssenceTextInputField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,7 +192,7 @@
 			children = (
 				D63F9341254CDE91006249F6 /* Extensions+UIView.swift */,
 				D63F9342254CDE91006249F6 /* Firebase+Utils.swift */,
-				D661073E256D7E830004A5F4 /* Custon+UIColor.swift */,
+				D661073E256D7E830004A5F4 /* Custom+UIColor.swift */,
 				D661078C257033820004A5F4 /* Formatting.swift */,
 			);
 			path = Extension;
@@ -202,8 +203,8 @@
 			children = (
 				D6610731256D78A50004A5F4 /* BaseTabBarController.swift */,
 				D6610739256D7D530004A5F4 /* TodayTableController.swift */,
-				D661076025701FDB0004A5F4 /* CreateTableController.swift */,
-				D661077A25702C020004A5F4 /* CreateCategoryController.swift */,
+				D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */,
+				D661077A25702C020004A5F4 /* CreateController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -340,14 +341,14 @@
 			files = (
 				D661073A256D7D530004A5F4 /* TodayTableController.swift in Sources */,
 				D63F9344254CDE91006249F6 /* Firebase+Utils.swift in Sources */,
-				D661076125701FDB0004A5F4 /* CreateTableController.swift in Sources */,
-				D661073F256D7E830004A5F4 /* Custon+UIColor.swift in Sources */,
+				D661076125701FDB0004A5F4 /* SelectCategoryTableController.swift in Sources */,
+				D661073F256D7E830004A5F4 /* Custom+UIColor.swift in Sources */,
 				D6610732256D78A50004A5F4 /* BaseTabBarController.swift in Sources */,
 				D6610749256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift in Sources */,
 				D661076B257024460004A5F4 /* CreateNewCategoryCell.swift in Sources */,
 				D6610744256D80030004A5F4 /* TodayCategoryCell.swift in Sources */,
 				D63F9309254CDB93006249F6 /* AppDelegate.swift in Sources */,
-				D661078025702C940004A5F4 /* EssenceInputView.swift in Sources */,
+				D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */,
 				D661074E256D8A9E0004A5F4 /* EssenceCell.swift in Sources */,
 				D6610766257023320004A5F4 /* Category.swift in Sources */,
 				D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */,
@@ -356,7 +357,7 @@
 				D63F930B254CDB93006249F6 /* SceneDelegate.swift in Sources */,
 				D6610756256D90AE0004A5F4 /* DividerCell.swift in Sources */,
 				D63F9343254CDE91006249F6 /* Extensions+UIView.swift in Sources */,
-				D661077B25702C020004A5F4 /* CreateCategoryController.swift in Sources */,
+				D661077B25702C020004A5F4 /* CreateController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D63F932B254CDB94006249F6 /* EssenceUITests.swift in Sources */,
+				D6FCAB292585BC5F00F90F41 /* EssenceTextInputField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

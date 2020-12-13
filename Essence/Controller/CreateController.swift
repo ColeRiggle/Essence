@@ -7,30 +7,30 @@
 
 import UIKit
 
-class CreateCategoryController: UIViewController {
-    
+class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCategoryDelegate {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLayout()
     }
     
-    fileprivate let categoryInput: EssenceInputView = {
-        let view = EssenceInputView()
+    fileprivate let categoryInput: EssenceTextInputField = {
+        let view = EssenceTextInputField()
         view.title = "Category"
         view.placeholder = "Spanish"
         return view
     }()
     
-    fileprivate let titleInput: EssenceInputView = {
-        let view = EssenceInputView()
+    fileprivate let titleInput: EssenceTextInputField = {
+        let view = EssenceTextInputField()
         view.title = "Note title"
         view.placeholder = "Top 50 Verbs"
         return view
     }()
     
-    fileprivate let locationInput: EssenceInputView = {
-        let view = EssenceInputView()
+    fileprivate let locationInput: EssenceTextInputField = {
+        let view = EssenceTextInputField()
         view.title = "Location"
         view.placeholder = "Notability"
         return view
@@ -71,6 +71,20 @@ class CreateCategoryController: UIViewController {
         createButton.anchor(top: stackView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 24, left: 0, bottom: 0, right: 0))
         createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         createButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
+        
+        categoryInput.delegate = self
     }
     
+    func textFieldClicked(textField: UITextField) {
+        textField.isEnabled = false
+        let selectCategoryController = SelectCategoryTableController()
+        selectCategoryController.delegate = self
+        let navController = UINavigationController(rootViewController: selectCategoryController)
+        present(navController, animated: true)
+        textField.isEnabled = true
+    }
+    
+    func categoryDidChange(title: String) {
+        categoryInput.placeholder = title
+    }
 }

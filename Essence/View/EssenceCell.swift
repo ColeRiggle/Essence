@@ -9,6 +9,8 @@ import UIKit
 
 class EssenceCell: UITableViewCell {
     
+    var delegate: EssenceCellDelegate?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         // Creates spacing between cells / border around each cell
@@ -16,4 +18,13 @@ class EssenceCell: UITableViewCell {
         contentView.backgroundColor = UIColor.Application.General.foreground
         contentView.layer.cornerRadius = 6
     }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        delegate?.setSelected(cell: self)
+    }
+}
+
+protocol EssenceCellDelegate {
+    func setSelected(cell: EssenceCell)
 }
