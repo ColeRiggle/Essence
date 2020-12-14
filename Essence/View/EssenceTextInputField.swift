@@ -35,7 +35,7 @@ class EssenceTextInputField: UIView {
         return label
     }()
     
-    fileprivate let textField: InsetTextField = {
+    let textField: InsetTextField = {
         let textField = InsetTextField()
         textField.layer.cornerRadius = 8
         textField.textColor = .white

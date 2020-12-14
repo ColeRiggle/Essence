@@ -16,7 +16,7 @@ class SelectCategoryTableController: UITableViewController {
 
     var delegate: CreateCategoryDelegate?
     
-    fileprivate let categories = [
+    fileprivate var categories = [
         Category(name: "EECS 281", lastStudied: Date(), cardCount: 10),
         Category(name: "Spanish Grammar", lastStudied: Date(), cardCount: 15),
         Category(name: "Music Theory", lastStudied: Date(), cardCount: 3),
@@ -85,7 +85,20 @@ class SelectCategoryTableController: UITableViewController {
     }
     
     fileprivate func handleCreateCategory() {
-        // TODO: Implement
+        let createAlert = UIAlertController(title: "Create Category", message: nil, preferredStyle: .alert)
+        
+        createAlert.addTextField{ (textField) in
+            textField.placeholder = "Deck name"
+        }
+        
+        createAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        createAlert.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self, weak createAlert] (_) in
+            self?.categories.append(Category(name: createAlert?.textFields![0].text ?? "", lastStudied: Date(), cardCount: 69))
+            self?.tableView.reloadData()
+        }))
+        
+        present(createAlert, animated: true)
     }
     
     @objc fileprivate func handleDimiss() {

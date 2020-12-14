@@ -15,6 +15,16 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         setupLayout()
     }
     
+    fileprivate var canCreate = false {
+        didSet {
+            if canCreate {
+                createButton.backgroundColor = .systemBlue
+            } else {
+                createButton.backgroundColor = .systemGray3
+            }
+        }
+    }
+    
     fileprivate let categoryInput: EssenceTextInputField = {
         let view = EssenceTextInputField()
         view.title = "Category"
@@ -38,11 +48,11 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
     
     fileprivate let createButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemBlue
         button.setTitle("Create", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 30, weight: .bold)
         button.layer.cornerRadius = 25
+        button.isEnabled = false
         return button
     }()
     
@@ -73,6 +83,7 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         createButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
         
         categoryInput.delegate = self
+        canCreate = false
     }
     
     func textFieldClicked(textField: UITextField) {
@@ -85,6 +96,8 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
     }
     
     func categoryDidChange(title: String) {
-        categoryInput.placeholder = title
+        categoryInput.textField.text = title
+        canCreate = true
     }
+    
 }
