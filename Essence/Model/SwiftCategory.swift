@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Category {
+struct SwiftCategory {
     
     let name: String
     let lastStudied: Date

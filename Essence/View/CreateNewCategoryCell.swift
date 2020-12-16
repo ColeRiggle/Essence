@@ -24,8 +24,8 @@ class CreateNewCategoryCell: EssenceCell {
         return iv
     }()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         let stackView = UIStackView(arrangedSubviews: [
             createIcon,
@@ -42,6 +42,10 @@ class CreateNewCategoryCell: EssenceCell {
         
         stackView.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 18, bottom: 0, right: 0))
         stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
 }

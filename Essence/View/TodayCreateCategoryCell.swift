@@ -42,8 +42,8 @@ class TodayCreateCategoryCell: EssenceCell {
         return button
     }()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         notesDue = 5
         
@@ -55,6 +55,10 @@ class TodayCreateCategoryCell: EssenceCell {
         
         contentView.addSubview(stackView)
         stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 18, left: 24, bottom: 0, right: 24))
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
     required init?(coder: NSCoder) {

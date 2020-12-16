@@ -27,6 +27,10 @@ class DividerCell: EssenceCell {
         super.layoutSubviews()
         
         contentView.backgroundColor = .clear
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         let bar1 = createBar()
         let bar2 = createBar()
@@ -52,7 +56,6 @@ class DividerCell: EssenceCell {
         
         bar2.leadingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 12).isActive = true
         bar2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        
     }
     
     fileprivate func createBar() -> UIView {

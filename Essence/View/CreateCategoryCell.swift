@@ -31,10 +31,8 @@ class CreateCategoryCell: EssenceCell {
         return label
     }()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.backgroundColor = UIColor.Application.General.foreground
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         let stackView = UIStackView(arrangedSubviews: [
             nameLabel,
@@ -46,6 +44,12 @@ class CreateCategoryCell: EssenceCell {
         
         contentView.addSubview(stackView)
         stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: .init(top: 8, left: 12, bottom: 6, right: 0))
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    
+        contentView.backgroundColor = UIColor.Application.General.foreground
     }
     
     required init?(coder: NSCoder) {
