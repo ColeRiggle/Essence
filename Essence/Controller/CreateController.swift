@@ -8,7 +8,7 @@
 import UIKit
 
 class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCategoryDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,21 +83,33 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         createButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
         
         categoryInput.delegate = self
+        titleInput.delegate = self
+        locationInput.delegate = self
         canCreate = false
     }
     
-    func textFieldClicked(textField: UITextField) {
-        textField.isEnabled = false
-        let selectCategoryController = SelectCategoryTableController()
-        selectCategoryController.delegate = self
-        let navController = UINavigationController(rootViewController: selectCategoryController)
-        present(navController, animated: true)
-        textField.isEnabled = true
+    func textFieldClicked(inputField: EssenceTextInputField, textField: UITextField) {
+        if inputField == categoryInput {
+            textField.isEnabled = false
+            let selectCategoryController = SelectCategoryTableController()
+            selectCategoryController.delegate = self
+            let navController = UINavigationController(rootViewController: selectCategoryController)
+            present(navController, animated: true)
+            textField.isEnabled = true
+        }
+    }
+    
+    func textEditied(inputField: EssenceTextInputField, textField: UITextField) {
+        if categoryInput.textField.text ?? "" != "" && titleInput.textField.text ?? "" != "" && locationInput.textField.text ?? "" != "" {
+            canCreate = true
+        } else {
+            canCreate = false
+        }
+        
     }
     
     func categoryDidChange(title: String) {
         categoryInput.textField.text = title
-        canCreate = true
     }
     
 }

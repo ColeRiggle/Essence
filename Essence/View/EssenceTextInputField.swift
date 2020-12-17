@@ -8,22 +8,29 @@
 import UIKit
 
 protocol EssenceInputFieldDelegate {
-    func textFieldClicked(textField: UITextField)
+    func textFieldClicked(inputField: EssenceTextInputField, textField: UITextField)
+    func textEditied(inputField: EssenceTextInputField, textField: UITextField)
 }
 
-class EssenceTextInputField: UIView {
+class EssenceTextInputField: UIView, UITextFieldDelegate {
     
     var delegate: EssenceInputFieldDelegate?
     
     var title: String? {
-        didSet {
-            titleLabel.text = title;
+        set {
+            titleLabel.text = newValue;
+        }
+        get {
+            return titleLabel.text
         }
     }
     
     var placeholder: String? {
-        didSet {
-            textField.attributedPlaceholder = NSAttributedString(string: placeholder!, attributes: [NSAttributedString.Key.foregroundColor : UIColor.Application.General.secondaryText])
+        set {
+            textField.attributedPlaceholder = NSAttributedString(string: newValue!, attributes: [NSAttributedString.Key.foregroundColor : UIColor.Application.General.secondaryText])
+        }
+        get {
+            return textField.placeholder
         }
     }
     
@@ -56,13 +63,26 @@ class EssenceTextInputField: UIView {
         stackView.spacing = 10
         stackView.distribution = .fillProportionally
         
+        textField.delegate = self
+        
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 0, left: Formatting.sideInset, bottom: 0, right: Formatting.sideInset))
         
         textField.addTarget(self, action: #selector(textFieldClicked), for: .touchDown);
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textDidChange),
+            name: UITextField.textDidChangeNotification,
+            object: nil)
     }
     
+    @objc fileprivate func textDidChange() {
+        delegate?.textEditied(inputField: self, textField: textField)
+    }
+    
+
     @objc fileprivate func textFieldClicked() {
-        delegate?.textFieldClicked(textField: textField)
+        delegate?.textFieldClicked(inputField: self, textField: textField)
     }
 }

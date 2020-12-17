@@ -70,7 +70,6 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = EssenceCell()
-        print("Getting cell at: \(indexPath)")
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 cell = CreateNewCategoryCell()
@@ -82,8 +81,8 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
         } else {
             let categoryCell = CreateCategoryCell()
             if let category = fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) {
-                categoryCell.cardCountLabel.text = "\(category.cardCount!) cards"
-                categoryCell.nameLabel.text = category.name
+                categoryCell.cardCount = Int(category.cardCount)
+                categoryCell.name = category.name
                 cell = categoryCell
             }
         }
@@ -120,7 +119,7 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             handleCreateCategory()
-        } else if indexPath.row > 1 {
+        } else if indexPath.section == categoriesSection {
             delegate?.categoryDidChange(title: (fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) as! Category).name ?? "")
             handleDimiss()
         }
@@ -151,6 +150,13 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
         category.setValue(name, forKey: "name")
         category.setValue(nil, forKey: "lastReviewed")
         category.setValue(0, forKey: "cardCount")
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Encountered error while saving category: \(error)")
+        }
+        
     }
     
     fileprivate func presentErrorAlert() {
