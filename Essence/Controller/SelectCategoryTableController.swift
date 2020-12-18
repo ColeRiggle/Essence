@@ -13,29 +13,11 @@ protocol CreateCategoryDelegate {
     func categoryDidChange(title: String)
 }
 
-class SelectCategoryTableController: UITableViewController, NSFetchedResultsControllerDelegate {
+class SelectCategoryTableController: BaseCategoryDisplayController {
 
     var delegate: CreateCategoryDelegate?
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
-        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: SceneDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
-    }()
-    
-    fileprivate var categories = [
-        SwiftCategory(name: "EECS 281", lastStudied: Date(), cardCount: 10),
-        SwiftCategory(name: "Spanish Grammar", lastStudied: Date(), cardCount: 15),
-        SwiftCategory(name: "Music Theory", lastStudied: Date(), cardCount: 3),
-        SwiftCategory(name: "Discrete Math", lastStudied: Date(), cardCount: 32)
-    ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.Application.General.viewBackground
@@ -46,26 +28,6 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
         navigationController?.navigationBar.barStyle = .black
         navigationItem.setLeftBarButton(UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleDimiss)), animated: false)
         navigationItem.leftBarButtonItem?.tintColor = UIColor.Application.General.navigationTint
-        
-        do {
-            try self.fetchedResultsController.performFetch()
-        } catch {
-            let error = error
-            print("Unable to perform fetch request: \(error)")
-        }
-    }
-    
-    fileprivate let categoriesSection = 1
-    
-    // The following two functions are used to convert between the indexpaths used in the fetched results container
-    // and in the table view more broadly
-    
-    fileprivate func convertIndexPathFromFetchedResultsContainer(for indexPath: IndexPath) -> IndexPath {
-        return .init(row: indexPath.row, section: categoriesSection)
-    }
-    
-    fileprivate func convertIndexPathForFetchedResultsContainer(for indexPath: IndexPath) -> IndexPath {
-        return .init(row: indexPath.row, section: 0)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +42,7 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
             }
         } else {
             let categoryCell = CreateCategoryCell()
-            if let category = fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) {
+            if let category = super.getCategory(for: indexPath) {
                 categoryCell.cardCount = Int(category.cardCount)
                 categoryCell.name = category.name
                 cell = categoryCell
@@ -119,8 +81,8 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             handleCreateCategory()
-        } else if indexPath.section == categoriesSection {
-            delegate?.categoryDidChange(title: (fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) as! Category).name ?? "")
+        } else if indexPath.section == getCategoriesSection() {
+            delegate?.categoryDidChange(title: (getCategory(for: indexPath))?.name ?? "")
             handleDimiss()
         }
     }
@@ -144,7 +106,14 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
         let managedContext = SceneDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedContext)!
 
-        guard let name = name else { presentErrorAlert(); return }
+        guard let name = name else { presentErrorAlert(title: "Invalid name"); return }
+        
+        if (name.trimmingCharacters(in: .whitespaces).isEmpty) {
+            presentErrorAlert(title: "Name cannot be empty")
+        } else if (categoryExists(name: name)) {
+            presentErrorAlert(title: "That name is already taken")
+            return
+        }
         
         let category = NSManagedObject(entity: entity, insertInto: managedContext)
         category.setValue(name, forKey: "name")
@@ -159,37 +128,13 @@ class SelectCategoryTableController: UITableViewController, NSFetchedResultsCont
         
     }
     
-    fileprivate func presentErrorAlert() {
-        let alert = UIAlertController(title: "Invalid name", message: nil, preferredStyle: .alert)
+    fileprivate func presentErrorAlert(title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
         present(alert, animated: true)
     }
     
     @objc fileprivate func handleDimiss() {
         dismiss(animated: true)
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-            if let indexPath = newIndexPath {
-                tableView.performBatchUpdates({
-                    tableView.setContentOffset(self.tableView.contentOffset, animated: false)
-                    tableView.insertRows(at: [convertIndexPathFromFetchedResultsContainer(for: indexPath)], with: .right)
-                }, completion: nil)
-            }
-            break;
-        default:
-            print("")
-        }
-        
     }
 }

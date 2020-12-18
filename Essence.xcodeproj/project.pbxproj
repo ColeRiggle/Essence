@@ -32,6 +32,7 @@
 		D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610784257032FA0004A5F4 /* InsetTextField.swift */; };
 		D661078D257033820004A5F4 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661078C257033820004A5F4 /* Formatting.swift */; };
 		D6E0EB5D258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0EB5C258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift */; };
+		D6E0EB7A258C658900680C9D /* BaseCategoryDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */; };
 		D6F802C92587EE6C00D393FF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6F802C72587EE6C00D393FF /* Model.xcdatamodeld */; };
 		D6F802CF2587EEFC00D393FF /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F802CD2587EEFC00D393FF /* Category+CoreDataClass.swift */; };
 		D6F802D02587EEFC00D393FF /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F802CE2587EEFC00D393FF /* Category+CoreDataProperties.swift */; };
@@ -87,6 +88,7 @@
 		D6610784257032FA0004A5F4 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		D661078C257033820004A5F4 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		D6E0EB5C258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFetchedResultsController+SafeObjectAtIndexPath.swift"; sourceTree = "<group>"; };
+		D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryDisplayController.swift; sourceTree = "<group>"; };
 		D6F802C82587EE6C00D393FF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D6F802CD2587EEFC00D393FF /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D6F802CE2587EEFC00D393FF /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -215,8 +217,9 @@
 			children = (
 				D6610731256D78A50004A5F4 /* BaseTabBarController.swift */,
 				D6610739256D7D530004A5F4 /* TodayTableController.swift */,
-				D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */,
 				D661077A25702C020004A5F4 /* CreateController.swift */,
+				D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */,
+				D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */,
 				D6610773257029800004A5F4 /* CreateCategoryCell.swift in Sources */,
 				D661078D257033820004A5F4 /* Formatting.swift in Sources */,
+				D6E0EB7A258C658900680C9D /* BaseCategoryDisplayController.swift in Sources */,
 				D6F802CF2587EEFC00D393FF /* Category+CoreDataClass.swift in Sources */,
 				D6F802D02587EEFC00D393FF /* Category+CoreDataProperties.swift in Sources */,
 				D63F930B254CDB93006249F6 /* SceneDelegate.swift in Sources */,
