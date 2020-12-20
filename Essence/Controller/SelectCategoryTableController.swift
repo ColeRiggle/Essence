@@ -16,7 +16,6 @@ protocol CreateCategoryDelegate {
 class SelectCategoryTableController: BaseCategoryDisplayController {
 
     var delegate: CreateCategoryDelegate?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +63,7 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
             return 2
         }
         
-        guard let quotes = fetchedResultsController.fetchedObjects else { return 0 }
-        return quotes.count
+        return getCount()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

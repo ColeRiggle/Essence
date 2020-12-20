@@ -102,6 +102,11 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         }
     }
     
+    final func getCount() -> Int {
+        guard let quotes = fetchedResultsController.fetchedObjects else { return 0 }
+        return quotes.count
+    }
+    
     final func getCategory(for indexPath: IndexPath) -> Category? {
         return fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) as! Category?
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodayTableController: UITableViewController {
+class TodayTableController: BaseCategoryDisplayController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,17 +19,26 @@ class TodayTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: EssenceCell
+        var cell = EssenceCell()
         
-        if indexPath.row == 0 {
-            cell = TodayCreateCategoryCell()
-        } else if indexPath.row == 1 {
-            let divider = DividerCell()
-            divider.backgroundColor = .clear
-            divider.message = "Or select a category"
-            cell = divider
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cell = TodayCreateCategoryCell()
+            } else if indexPath.row == 1 {
+                let divider = DividerCell()
+                divider.backgroundColor = .clear
+                divider.message = "Or select a category"
+                cell = divider
+            }
         } else {
-            cell = TodayCategoryCell()
+            let todayCategoryCell = TodayCategoryCell()
+            if let category = getCategory(for: indexPath) {
+                todayCategoryCell.name = category.name
+                todayCategoryCell.lastStudied = category.lastReviewed
+                todayCategoryCell.reviewCount = Int(category.cardCount)
+            }
+            
+            cell = todayCategoryCell
         }
 
         cell.backgroundColor = .clear // Needed when insetting the cell's frame in layoutSubviews()
@@ -38,18 +47,24 @@ class TodayTableController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if section == 0 {
+            return 2
+        }
+        
+        return getCount()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 0) {
-            return 180.0
-        } else if (indexPath.row == 1) {
-            return 50.0
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                return 180.0
+            } else {
+                return 50.0
+            }
         } else {
             return 100.0
         }

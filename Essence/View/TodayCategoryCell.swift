@@ -13,7 +13,46 @@ class TodayCategoryCell: EssenceCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    let nameLabel: UILabel = {
+    fileprivate let maxSize: CGFloat = 32
+    fileprivate let minSize: CGFloat = 18
+    
+    var name: String? {
+        didSet {
+            nameLabel.text = name ?? ""
+            
+            let sizePerCharacter: CGFloat = contentView.frame.width / CGFloat(name?.count ?? 1)
+
+            var fontSize: CGFloat = sizePerCharacter * 1.5
+
+            if (fontSize < minSize) {
+                fontSize = minSize
+            } else {
+                fontSize = maxSize
+            }
+            nameLabel.text = name
+            nameLabel.font = nameLabel.font.withSize(fontSize)
+        }
+    }
+    
+    var lastStudied: Date? {
+        didSet {
+            if let lastStudied = lastStudied {
+                let diffComponents = Calendar.current.dateComponents([.hour], from: lastStudied, to: Date())
+                let days = diffComponents.day!
+                let dayLabel = days == 1 ? "day" : "days"
+                lastStudiedLabel.text = "Last studied \(days) \(dayLabel) ago"
+            }
+           
+        }
+    }
+    
+    var reviewCount: Int? {
+        didSet {
+            reviewCountLabel.text = String(reviewCount!)
+        }
+    }
+    
+    fileprivate let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "EECS 281"
         label.font = .systemFont(ofSize: 42)
@@ -22,7 +61,7 @@ class TodayCategoryCell: EssenceCell {
         return label
     }()
     
-    let lastStudiedLabel: UILabel = {
+    fileprivate let lastStudiedLabel: UILabel = {
         let label = UILabel()
         label.text = "Last studied 4 days ago"
         label.font = .systemFont(ofSize: 24)
@@ -31,7 +70,7 @@ class TodayCategoryCell: EssenceCell {
         return label
     }()
     
-    let reviewCountLabel: UILabel = {
+    fileprivate let reviewCountLabel: UILabel = {
         let label = UILabel()
         label.text = "6"
         label.font = .systemFont(ofSize: 56)
