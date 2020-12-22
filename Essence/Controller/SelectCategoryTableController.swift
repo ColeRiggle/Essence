@@ -126,6 +126,23 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
         
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            if let sessions = fetchedResultsController.fetchedObjects as [Category]? {
+                fetchedResultsController.managedObjectContext.delete(sessions[indexPath.row])
+                print("Deleting object \(indexPath.row)")
+                
+                do {
+                    print("Attempting deletion at: \(indexPath)")
+                    try fetchedResultsController.managedObjectContext.save()
+                } catch {
+                    print("Error occured while handeling deletion: \(error)")
+                }
+            }
+        }
+    }
+    
     fileprivate func presentErrorAlert(title: String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))

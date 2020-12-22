@@ -97,6 +97,10 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
                 }, completion: nil)
             }
             break;
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [convertIndexPathFromFetchedResultsContainer(for: indexPath)], with: .fade)
+            }
         default:
             print("")
         }
@@ -110,5 +114,4 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
     final func getCategory(for indexPath: IndexPath) -> Category? {
         return fetchedResultsController.exceptionFreeObject(at: convertIndexPathForFetchedResultsContainer(for: indexPath) as NSIndexPath) as! Category?
     }
-    
 }

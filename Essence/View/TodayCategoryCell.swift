@@ -42,7 +42,6 @@ class TodayCategoryCell: EssenceCell {
                 let dayLabel = days == 1 ? "day" : "days"
                 lastStudiedLabel.text = "Last studied \(days) \(dayLabel) ago"
             }
-           
         }
     }
     
