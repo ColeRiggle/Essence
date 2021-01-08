@@ -6,21 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
-class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCategoryDelegate {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupLayout()
-    }
+class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCategoryDelegate, UITextFieldDelegate {
     
     fileprivate var canCreate = false {
         didSet {
             if canCreate {
                 createButton.backgroundColor = .systemBlue
+                createButton.isEnabled = true
             } else {
                 createButton.backgroundColor = .systemGray3
+                createButton.isEnabled = false
             }
         }
     }
@@ -34,7 +31,7 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
     
     fileprivate let titleInput: EssenceTextInputField = {
         let view = EssenceTextInputField()
-        view.title = "Note title"
+        view.title = "Note Title"
         view.placeholder = "Top 50 Verbs"
         return view
     }()
@@ -55,6 +52,19 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         button.isEnabled = false
         return button
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupLayout()
+        
+        categoryInput.delegate = self
+        titleInput.delegate = self
+        locationInput.delegate = self
+        
+        print("Setting target")
+        createButton.addTarget(self, action: #selector(CreateController.handleCreate), for: .touchUpInside)
+    }
     
     fileprivate func setupLayout() {
         view.backgroundColor = UIColor.Application.General.viewBackground
@@ -88,6 +98,8 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         canCreate = false
     }
     
+    // MARK: EssenceTextInputFieldDelegate functions
+    
     func textFieldClicked(inputField: EssenceTextInputField, textField: UITextField) {
         if inputField == categoryInput {
             textField.isEnabled = false
@@ -105,11 +117,63 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         } else {
             canCreate = false
         }
-        
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("here")
+        self.view.endEditing(true)
+        return false
+    }
+    
+    // MARK: Other targets / delegate functions
     
     func categoryDidChange(title: String) {
         categoryInput.textField.text = title
     }
     
+    @objc func handleCreate() {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        
+        //Category category = SceneDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
+        fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "name = %@", categoryInput.textField.text!)
+        
+        var category: Category?
+        
+        do {
+            let categories = try managedContext.fetch(fetchRequest)
+            if categories.count != 1 {
+                throw EssenceError("Category not found")
+            }
+            category = categories.first
+            
+        } catch {
+            print("Error encountered when attempting card creation: \(error)")
+            return
+        }
+        
+        createNote(category: category!, noteTitle: titleInput.textField.text!, location: locationInput.textField.text!)
+        
+        refreshView()
+    }
+    
+    fileprivate func createNote(category: Category, noteTitle: String, location: String) {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
+        
+        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+        note.setValue(noteTitle, forKey: "title")
+        note.setValue(location, forKey: "location")
+        note.setValue(Date(), forKey: "createdDate")
+        note.setValue(Date(), forKey: "lastReviewedDate")
+    }
+    
+    fileprivate func refreshView() {
+        categoryInput.reset()
+        titleInput.reset()
+        locationInput.reset()
+        canCreate = false
+        self.view.endEditing(true)
+    }
 }

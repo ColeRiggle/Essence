@@ -10,6 +10,7 @@ import UIKit
 protocol EssenceInputFieldDelegate {
     func textFieldClicked(inputField: EssenceTextInputField, textField: UITextField)
     func textEditied(inputField: EssenceTextInputField, textField: UITextField)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
 }
 
 class EssenceTextInputField: UIView, UITextFieldDelegate {
@@ -84,5 +85,13 @@ class EssenceTextInputField: UIView, UITextFieldDelegate {
 
     @objc fileprivate func textFieldClicked() {
         delegate?.textFieldClicked(inputField: self, textField: textField)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return delegate?.textFieldShouldReturn(textField) ?? false
+    }
+    
+    func reset() {
+        textField.text = ""
     }
 }

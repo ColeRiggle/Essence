@@ -83,9 +83,16 @@ class CreateCategoryCell: EssenceCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    
+
+        
         contentView.backgroundColor = UIColor.Application.General.foreground
     }
+    
+    override func didTransition(to state: UITableViewCell.StateMask) {
+        super.willTransition(to: state)
+
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
