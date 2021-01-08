@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodayTableController: BaseCategoryDisplayController {
     
@@ -16,6 +17,11 @@ class TodayTableController: BaseCategoryDisplayController {
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.alwaysBounceVertical = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,9 +39,23 @@ class TodayTableController: BaseCategoryDisplayController {
         } else {
             let todayCategoryCell = TodayCategoryCell()
             if let category = getCategory(for: indexPath) {
+                
+                let managedContext = SceneDelegate.persistentContainer.viewContext
+                
+                let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+                fetchRequest.includesSubentities = false
+                fetchRequest.predicate = NSPredicate(format: "category = %@", category)
+                
+                do {
+                    let notes = try managedContext.fetch(fetchRequest)
+                    todayCategoryCell.reviewCount = notes.count
+                    print("Review count: \(notes.count)")
+                } catch {
+                    print("Error encountered when attempting card creation: \(error)")
+                }
+                
                 todayCategoryCell.name = category.name
                 todayCategoryCell.lastStudied = category.lastReviewed
-                todayCategoryCell.reviewCount = Int(category.cardCount)
             }
             
             cell = todayCategoryCell

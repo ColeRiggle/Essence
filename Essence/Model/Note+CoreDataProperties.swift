@@ -22,10 +22,15 @@ extension Note {
     @NSManaged public var lastReviewedDate: Date?
     @NSManaged public var category: Category?
     
-    @NSManaged func addParentsObject(value: Category)
-    @NSManaged func removeParentsObject(value: Category)
-    @NSManaged func addParents(value: Set<Category>)
-    @NSManaged func removeParents(value: Set<Category>)
+//    func addCategoryObject(value: Category) {
+//        let items = self.mutableSetValue(forKey: "category")
+//        items.add(value)
+//    }
+//    
+//    func removeCategoryObject(value: Category) {
+//        let items = self.mutableSetValue(forKey: "category")
+//        items.remove(value)
+//    }
 }
 
 extension Note : Identifiable {

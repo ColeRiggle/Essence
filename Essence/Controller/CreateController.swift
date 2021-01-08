@@ -134,7 +134,6 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
     @objc func handleCreate() {
         let managedContext = SceneDelegate.persistentContainer.viewContext
         
-        //Category category = SceneDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Category>(entityName: "Category")
         fetchRequest.includesSubentities = false
         fetchRequest.predicate = NSPredicate(format: "name = %@", categoryInput.textField.text!)
@@ -154,19 +153,25 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         }
         
         createNote(category: category!, noteTitle: titleInput.textField.text!, location: locationInput.textField.text!)
-        
         refreshView()
     }
     
     fileprivate func createNote(category: Category, noteTitle: String, location: String) {
         let managedContext = SceneDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Note", in: managedContext)!
-        
-        let note = NSManagedObject(entity: entity, insertInto: managedContext)
+        let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into: managedContext) as! Note
+ 
         note.setValue(noteTitle, forKey: "title")
         note.setValue(location, forKey: "location")
         note.setValue(Date(), forKey: "createdDate")
         note.setValue(Date(), forKey: "lastReviewedDate")
+        note.setValue(category, forKey: "category")
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Error encountered when creating note: \(error)")
+        }
+        
     }
     
     fileprivate func refreshView() {
