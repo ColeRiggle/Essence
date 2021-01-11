@@ -10,6 +10,8 @@ import CoreData
 
 class TodayTableController: BaseCategoryDisplayController {
     
+    fileprivate let databaseService = EssenceDatabaseService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.Application.General.viewBackground
@@ -29,7 +31,9 @@ class TodayTableController: BaseCategoryDisplayController {
         
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                cell = TodayCreateCategoryCell()
+                let reviewCell = TodayReviewCell()
+                reviewCell.notesDue = databaseService.getDueNotes().count
+                cell = reviewCell
             } else if indexPath.row == 1 {
                 let divider = DividerCell()
                 divider.backgroundColor = .clear
@@ -39,21 +43,9 @@ class TodayTableController: BaseCategoryDisplayController {
         } else {
             let todayCategoryCell = TodayCategoryCell()
             if let category = getCategory(for: indexPath) {
+                let notes = databaseService.getNotesForCategory(category)
                 
-                let managedContext = SceneDelegate.persistentContainer.viewContext
-                
-                let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
-                fetchRequest.includesSubentities = false
-                fetchRequest.predicate = NSPredicate(format: "category = %@", category)
-                
-                do {
-                    let notes = try managedContext.fetch(fetchRequest)
-                    todayCategoryCell.reviewCount = notes.count
-                    print("Review count: \(notes.count)")
-                } catch {
-                    print("Error encountered when attempting card creation: \(error)")
-                }
-                
+                todayCategoryCell.reviewCount = notes.count
                 todayCategoryCell.name = category.name
                 todayCategoryCell.lastStudied = category.lastReviewed
             }

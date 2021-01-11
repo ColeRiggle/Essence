@@ -47,23 +47,6 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         }
     }
     
-    func categoryExists(name: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
-        fetchRequest.includesSubentities = false
-        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-
-        var entitiesCount = 0
-
-        do {
-            entitiesCount = try fetchedResultsController.managedObjectContext.count(for: fetchRequest)
-        }
-        catch {
-            print("error executing fetch request: \(error)")
-        }
-
-        return entitiesCount > 0
-    }
-    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }

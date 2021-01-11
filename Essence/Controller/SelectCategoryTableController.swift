@@ -14,9 +14,11 @@ protocol CreateCategoryDelegate {
 }
 
 class SelectCategoryTableController: BaseCategoryDisplayController {
-
+    
     var delegate: CreateCategoryDelegate?
 
+    fileprivate let databaseService = EssenceDatabaseService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.Application.General.viewBackground
@@ -42,7 +44,7 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
         } else {
             let categoryCell = CreateCategoryCell()
             if let category = super.getCategory(for: indexPath) {
-                categoryCell.cardCount = Int(category.cardCount)
+                categoryCell.cardCount = databaseService.getNotesForCategory(category).count
                 categoryCell.name = category.name
                 cell = categoryCell
             }
@@ -101,29 +103,20 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
     }
     
     fileprivate func createCategory(name: String?) {
-        let managedContext = SceneDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Category", in: managedContext)!
-
         guard let name = name else { presentErrorAlert(title: "Invalid name"); return }
         
         if (name.trimmingCharacters(in: .whitespaces).isEmpty) {
             presentErrorAlert(title: "Name cannot be empty")
-        } else if (categoryExists(name: name)) {
+        } else if (databaseService.categoryExists(withName: name)) {
             presentErrorAlert(title: "That name is already taken")
             return
         }
         
-        let category = NSManagedObject(entity: entity, insertInto: managedContext)
+        let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: SceneDelegate.persistentContainer.viewContext)
         category.setValue(name, forKey: "name")
         category.setValue(nil, forKey: "lastReviewed")
         category.setValue(0, forKey: "cardCount")
-        
-        do {
-            try managedContext.save()
-        } catch {
-            print("Encountered error while saving category: \(error)")
-        }
-        
+        databaseService.save()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

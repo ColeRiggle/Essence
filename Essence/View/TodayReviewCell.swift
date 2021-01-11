@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodayCreateCategoryCell: EssenceCell {
+class TodayReviewCell: EssenceCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -17,8 +17,13 @@ class TodayCreateCategoryCell: EssenceCell {
         didSet {
             if notesDue == 1 {
                 notesDueLabel.text = "1 Note Due"
+                reviewAllButton.isEnabled = true
+            } else if notesDue == 0 {
+                notesDueLabel.text = "No Notes Due"
+                reviewAllButton.isEnabled = false
             } else {
                 notesDueLabel.text = "\(notesDue) Notes Due"
+                reviewAllButton.isEnabled = true
             }
         }
     }
@@ -44,8 +49,6 @@ class TodayCreateCategoryCell: EssenceCell {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        notesDue = 5
         
         let stackView = UIStackView(arrangedSubviews: [notesDueLabel, reviewAllButton])
         stackView.axis = .vertical

@@ -24,7 +24,7 @@
 		D661073A256D7D530004A5F4 /* TodayTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610739256D7D530004A5F4 /* TodayTableController.swift */; };
 		D661073F256D7E830004A5F4 /* Custom+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661073E256D7E830004A5F4 /* Custom+UIColor.swift */; };
 		D6610744256D80030004A5F4 /* TodayCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610743256D80030004A5F4 /* TodayCategoryCell.swift */; };
-		D6610749256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610748256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift */; };
+		D6610749256D8A7D0004A5F4 /* TodayReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610748256D8A7D0004A5F4 /* TodayReviewCell.swift */; };
 		D661074E256D8A9E0004A5F4 /* EssenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661074D256D8A9E0004A5F4 /* EssenceCell.swift */; };
 		D6610756256D90AE0004A5F4 /* DividerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610755256D90AE0004A5F4 /* DividerCell.swift */; };
 		D661076125701FDB0004A5F4 /* SelectCategoryTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */; };
@@ -34,7 +34,7 @@
 		D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceTextInputField.swift */; };
 		D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610784257032FA0004A5F4 /* InsetTextField.swift */; };
 		D661078D257033820004A5F4 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661078C257033820004A5F4 /* Formatting.swift */; };
-		D6DF643325A8DC8000397D58 /* EssenceDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DF643225A8DC8000397D58 /* EssenceDatabase.swift */; };
+		D6DF643325A8DC8000397D58 /* EssenceDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */; };
 		D6E0EB5D258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0EB5C258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift */; };
 		D6E0EB7A258C658900680C9D /* BaseCategoryDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */; };
 		D6F802C92587EE6C00D393FF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D6F802C72587EE6C00D393FF /* Model.xcdatamodeld */; };
@@ -84,7 +84,7 @@
 		D6610739256D7D530004A5F4 /* TodayTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableController.swift; sourceTree = "<group>"; };
 		D661073E256D7E830004A5F4 /* Custom+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom+UIColor.swift"; sourceTree = "<group>"; };
 		D6610743256D80030004A5F4 /* TodayCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCategoryCell.swift; sourceTree = "<group>"; };
-		D6610748256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCreateCategoryCell.swift; sourceTree = "<group>"; };
+		D6610748256D8A7D0004A5F4 /* TodayReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayReviewCell.swift; sourceTree = "<group>"; };
 		D661074D256D8A9E0004A5F4 /* EssenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceCell.swift; sourceTree = "<group>"; };
 		D6610755256D90AE0004A5F4 /* DividerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerCell.swift; sourceTree = "<group>"; };
 		D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryTableController.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		D661077F25702C940004A5F4 /* EssenceTextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceTextInputField.swift; sourceTree = "<group>"; };
 		D6610784257032FA0004A5F4 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		D661078C257033820004A5F4 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
-		D6DF643225A8DC8000397D58 /* EssenceDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceDatabase.swift; sourceTree = "<group>"; };
+		D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceDatabaseService.swift; sourceTree = "<group>"; };
 		D6E0EB5C258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFetchedResultsController+SafeObjectAtIndexPath.swift"; sourceTree = "<group>"; };
 		D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryDisplayController.swift; sourceTree = "<group>"; };
 		D6F802C82587EE6C00D393FF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				D661074D256D8A9E0004A5F4 /* EssenceCell.swift */,
 				D6610784257032FA0004A5F4 /* InsetTextField.swift */,
 				D6610755256D90AE0004A5F4 /* DividerCell.swift */,
-				D6610748256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift */,
+				D6610748256D8A7D0004A5F4 /* TodayReviewCell.swift */,
 				D6610743256D80030004A5F4 /* TodayCategoryCell.swift */,
 				D661076A257024460004A5F4 /* CreateNewCategoryCell.swift */,
 				D6610772257029800004A5F4 /* CreateCategoryCell.swift */,
@@ -247,7 +247,7 @@
 		D6DF643125A8DC6F00397D58 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				D6DF643225A8DC8000397D58 /* EssenceDatabase.swift */,
+				D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 				D661076125701FDB0004A5F4 /* SelectCategoryTableController.swift in Sources */,
 				D661073F256D7E830004A5F4 /* Custom+UIColor.swift in Sources */,
 				D6610732256D78A50004A5F4 /* BaseTabBarController.swift in Sources */,
-				D6610749256D8A7D0004A5F4 /* TodayCreateCategoryCell.swift in Sources */,
+				D6610749256D8A7D0004A5F4 /* TodayReviewCell.swift in Sources */,
 				D661076B257024460004A5F4 /* CreateNewCategoryCell.swift in Sources */,
 				D657030125A7FB1200AD5A8E /* Note+CoreDataClass.swift in Sources */,
 				D657030225A7FB1200AD5A8E /* Note+CoreDataProperties.swift in Sources */,
@@ -401,7 +401,7 @@
 				D6610773257029800004A5F4 /* CreateCategoryCell.swift in Sources */,
 				D661078D257033820004A5F4 /* Formatting.swift in Sources */,
 				D65702F225A7AE8F00AD5A8E /* Extensions+UIViewController.swift in Sources */,
-				D6DF643325A8DC8000397D58 /* EssenceDatabase.swift in Sources */,
+				D6DF643325A8DC8000397D58 /* EssenceDatabaseService.swift in Sources */,
 				D6E0EB7A258C658900680C9D /* BaseCategoryDisplayController.swift in Sources */,
 				D65702F825A7F9AC00AD5A8E /* EssenceError.swift in Sources */,
 				D6F802CF2587EEFC00D393FF /* Category+CoreDataClass.swift in Sources */,

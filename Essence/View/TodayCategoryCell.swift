@@ -41,6 +41,8 @@ class TodayCategoryCell: EssenceCell {
                 let days = diffComponents.day!
                 let dayLabel = days == 1 ? "day" : "days"
                 lastStudiedLabel.text = "Last studied \(days) \(dayLabel) ago"
+            } else {
+                lastStudiedLabel.text = "Not yet studied"
             }
         }
     }
@@ -62,7 +64,7 @@ class TodayCategoryCell: EssenceCell {
     
     fileprivate let lastStudiedLabel: UILabel = {
         let label = UILabel()
-        label.text = "Last studied 4 days ago"
+        label.text = "Last studied 6 days ago"
         label.font = .systemFont(ofSize: 24)
         label.textAlignment = .left
         label.textColor = UIColor.Application.General.secondaryText
