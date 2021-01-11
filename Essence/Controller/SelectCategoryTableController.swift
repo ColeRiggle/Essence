@@ -120,19 +120,47 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             if let sessions = fetchedResultsController.fetchedObjects as [Category]? {
                 fetchedResultsController.managedObjectContext.delete(sessions[indexPath.row])
-                print("Deleting object \(indexPath.row)")
-                
+                print("Deleting category at index: \(indexPath.row)")
                 do {
-                    print("Attempting deletion at: \(indexPath)")
                     try fetchedResultsController.managedObjectContext.save()
                 } catch {
                     print("Error occured while handeling deletion: \(error)")
                 }
             }
+            
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
+    
+            self?.showDeleteWarning(forRowAt: indexPath, success: success)
+  
+        })
+        
+        return UISwipeActionsConfiguration(actions: [modifyAction])
+    }
+    
+    func showDeleteWarning(forRowAt indexPath: IndexPath, success: @escaping ((Bool) -> Void)) {
+        let confirmationAlert = UIAlertController(title: "Delete Category?", message: "This category and its notes will be permanently deleted.", preferredStyle: .alert)
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            success(true)
+        }))
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
+            if let self = self {
+                self.tableView(self.tableView, commit: .delete, forRowAt: indexPath)
+            }
+            success(true)
+        }))
+        
+        self.present(confirmationAlert, animated: true)
     }
     
     @objc fileprivate func handleDimiss() {
