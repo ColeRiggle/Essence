@@ -17,7 +17,9 @@ extension Note {
     }
 
     @NSManaged public var title: String?
+    @NSManaged public var masteryLevel: NSNumber?
     @NSManaged public var location: String?
+    @NSManaged public var dueDate: Date?
     @NSManaged public var createdDate: Date?
     @NSManaged public var lastReviewedDate: Date?
     @NSManaged public var category: Category?

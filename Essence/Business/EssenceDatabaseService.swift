@@ -51,6 +51,38 @@ struct EssenceDatabaseService {
         return []
     }
     
+    func getDueNotesForCategory(_ category: Category) -> [Note] {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+        fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "category = %@ AND dueDate <= %@", category, Date() as CVarArg)
+        
+        do {
+            return try managedContext.fetch(fetchRequest)
+        } catch {
+            print("Error encountered retrieving notes: \(error)")
+        }
+        
+        return []
+    }
+    
+    func getUndueNotesForCategory(_ category: Category) -> [Note] {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+        fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "category = %@ AND dueDate > %@", category, Date() as CVarArg)
+        
+        do {
+            return try managedContext.fetch(fetchRequest)
+        } catch {
+            print("Error encountered retrieving notes: \(error)")
+        }
+        
+        return []
+    }
+    
     func getDueNotes() -> [Note] {
         let managedContext = SceneDelegate.persistentContainer.viewContext
         

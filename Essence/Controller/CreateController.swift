@@ -162,6 +162,8 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
  
         note.setValue(noteTitle, forKey: "title")
         note.setValue(location, forKey: "location")
+        note.setValue(0, forKey: "masteryLevel")
+        note.setValue(Date(), forKey: "dueDate")
         note.setValue(Date(), forKey: "createdDate")
         note.setValue(Date(), forKey: "lastReviewedDate")
         note.setValue(category, forKey: "category")

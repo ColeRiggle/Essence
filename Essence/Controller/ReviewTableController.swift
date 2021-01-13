@@ -13,13 +13,15 @@ class ReviewTableController: UITableViewController {
         didSet {
             if let category = category {
                 navigationItem.title = category.name
-                notes = databaseService.getNotesForCategory(category)
+                dueNotes = databaseService.getDueNotesForCategory(category)
+                undueNotes = databaseService.getUndueNotesForCategory(category)
             }
             tableView.reloadData()
         }
     }
     
-    fileprivate var notes: [Note] = []
+    fileprivate var dueNotes: [Note] = []
+    fileprivate var undueNotes: [Note] = []
     
     fileprivate var databaseService = EssenceDatabaseService()
     
@@ -27,6 +29,7 @@ class ReviewTableController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.Application.General.viewBackground
         tableView.separatorStyle = .none
+        
         
         navigationController?.navigationBar.barStyle = .black
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
@@ -45,6 +48,16 @@ class ReviewTableController: UITableViewController {
         dismiss(animated: true)
     }
     
+    fileprivate func getNoteForIndexPath(_ indexPath: IndexPath) -> Note? {
+        if indexPath.section == 0 {
+            return dueNotes[indexPath.row - 1]
+        } else if indexPath.section == 1 {
+            return undueNotes[indexPath.row - 1]
+        }
+        
+        return nil
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = EssenceCell()
         
@@ -58,11 +71,12 @@ class ReviewTableController: UITableViewController {
             cell = divider
         } else {
             let reviewCell = ReviewCell()
-            reviewCell.note = notes[indexPath.row - 1]
+            reviewCell.note = getNoteForIndexPath(indexPath)
             cell = reviewCell
         }
         
-        cell.backgroundColor = UIColor.Application.General.viewBackground
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -72,9 +86,9 @@ class ReviewTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return notes.count + 1
+            return dueNotes.count + 1
         } else if section == 1 {
-            return 1
+            return undueNotes.count + 1
         }
         
         return 0
@@ -83,5 +97,19 @@ class ReviewTableController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         2
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let note = getNoteForIndexPath(indexPath) {
+            note.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            databaseService.save()
+            reload()
+        }
+    }
+    
+    fileprivate func reload() {
+        let cat = category
+        category = cat
+        tableView.reloadData()
     }
 }
