@@ -65,6 +65,5 @@ struct EssenceDatabaseService {
         
         return []
     }
-    
 }
 
