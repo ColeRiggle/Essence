@@ -16,7 +16,6 @@ class TodayTableController: BaseCategoryDisplayController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.Application.General.viewBackground
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.alwaysBounceVertical = false
     }
@@ -54,6 +53,7 @@ class TodayTableController: BaseCategoryDisplayController {
         }
 
         cell.backgroundColor = .clear // Needed when insetting the cell's frame in layoutSubviews()
+        cell.selectionStyle = .none // Needed so that color doesn't change when selected
         
         return cell
     }
@@ -81,4 +81,13 @@ class TodayTableController: BaseCategoryDisplayController {
             return 100.0
         }
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reviewController = ReviewTableController()
+        let navController = UINavigationController(rootViewController: reviewController)
+        navController.modalPresentationStyle = .overFullScreen
+        reviewController.category = getCategory(for: indexPath)
+        present(navController, animated: true)
+    }
+    
 }
