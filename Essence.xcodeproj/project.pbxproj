@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62F251625AF79B700DC9955 /* ReviewsCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62F251525AF79B700DC9955 /* ReviewsCompleteCell.swift */; };
 		D63F9309254CDB93006249F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63F9308254CDB93006249F6 /* AppDelegate.swift */; };
 		D63F930B254CDB93006249F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63F930A254CDB93006249F6 /* SceneDelegate.swift */; };
 		D63F9310254CDB93006249F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D63F930E254CDB93006249F6 /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D62F251525AF79B700DC9955 /* ReviewsCompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsCompleteCell.swift; sourceTree = "<group>"; };
 		D63F9305254CDB93006249F6 /* Essence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Essence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D63F9308254CDB93006249F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D63F930A254CDB93006249F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				D6610772257029800004A5F4 /* CreateCategoryCell.swift */,
 				D661077F25702C940004A5F4 /* EssenceTextInputField.swift */,
 				D695FE7125AE87F000D8CC35 /* ReviewCell.swift */,
+				D62F251525AF79B700DC9955 /* ReviewsCompleteCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				D6610732256D78A50004A5F4 /* BaseTabBarController.swift in Sources */,
 				D6610749256D8A7D0004A5F4 /* TodayReviewCell.swift in Sources */,
 				D661076B257024460004A5F4 /* CreateNewCategoryCell.swift in Sources */,
+				D62F251625AF79B700DC9955 /* ReviewsCompleteCell.swift in Sources */,
 				D657030125A7FB1200AD5A8E /* Note+CoreDataClass.swift in Sources */,
 				D657030225A7FB1200AD5A8E /* Note+CoreDataProperties.swift in Sources */,
 				D6F802C92587EE6C00D393FF /* Model.xcdatamodeld in Sources */,

@@ -116,13 +116,18 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
-    
-            self?.showDeleteWarning(forRowAt: indexPath, success: success)
-  
-        })
+        var actions: [UIContextualAction] = []
         
-        return UISwipeActionsConfiguration(actions: [modifyAction])
+        if canDelete(forRowAt: indexPath) {
+            let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
+
+                self?.showDeleteWarning(forRowAt: indexPath, success: success)
+
+            })
+            actions.append(modifyAction)
+        }
+        
+        return UISwipeActionsConfiguration(actions: actions)
     }
     
     func showDeleteWarning(forRowAt indexPath: IndexPath, success: @escaping ((Bool) -> Void)) {
@@ -140,5 +145,9 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         }))
         
         self.present(confirmationAlert, animated: true)
+    }
+    
+    func canDelete(forRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == getCategoriesSection()
     }
 }

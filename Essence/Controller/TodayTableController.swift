@@ -89,5 +89,4 @@ class TodayTableController: BaseCategoryDisplayController {
         reviewController.category = getCategory(for: indexPath)
         present(navController, animated: true)
     }
-    
 }

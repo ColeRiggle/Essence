@@ -16,6 +16,14 @@ class ReviewCell: EssenceCell {
         }
     }
     
+    let completeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "completeReview").withRenderingMode(.alwaysTemplate)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemGreen
+        return imageView
+    }()
+    
     fileprivate let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Note title"
@@ -32,14 +40,6 @@ class ReviewCell: EssenceCell {
         return label
     }()
     
-    fileprivate let completeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "completeReview").withRenderingMode(.alwaysTemplate), for: .normal)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = .systemGreen
-        return button
-    }()
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -52,14 +52,9 @@ class ReviewCell: EssenceCell {
         contentView.addSubview(stackView)
         stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 6, left: 12, bottom: 6, right: 70))
         
-        contentView.addSubview(completeButton)
-        completeButton.anchor(top: contentView.topAnchor, leading: stackView.trailingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 14, left: 0, bottom: 14, right: 10))
+        contentView.addSubview(completeImageView)
+        completeImageView.anchor(top: contentView.topAnchor, leading: stackView.trailingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 14, left: 0, bottom: 14, right: 10))
         
-        completeButton.heightAnchor.constraint(equalTo: completeButton.widthAnchor).isActive = true
+        completeImageView.heightAnchor.constraint(equalTo: completeImageView.widthAnchor).isActive = true
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
 }

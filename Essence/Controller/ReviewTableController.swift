@@ -70,9 +70,25 @@ class ReviewTableController: UITableViewController {
             }
             cell = divider
         } else {
-            let reviewCell = ReviewCell()
-            reviewCell.note = getNoteForIndexPath(indexPath)
-            cell = reviewCell
+            if dueNotes.count == 0 && indexPath.row == 1 && indexPath.section == 0 {
+                cell = ReviewsCompleteCell()
+            } else {
+                let reviewCell = ReviewCell()
+                reviewCell.note = getNoteForIndexPath(indexPath)
+                if let note = reviewCell.note, let dueDate = note.dueDate {
+                    if note.isDue() {
+                        reviewCell.completeImageView.isHidden = false
+                        if Calendar.current.isDate(dueDate, inSameDayAs: Date()) {
+                            reviewCell.completeImageView.tintColor = .systemGreen
+                        } else {
+                            reviewCell.completeImageView.tintColor = .systemRed
+                        }
+                    } else {
+                        reviewCell.completeImageView.isHidden = true
+                    }
+                }
+                cell = reviewCell
+            }
         }
         
         cell.backgroundColor = .clear
@@ -86,6 +102,9 @@ class ReviewTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            if dueNotes.count == 0 {
+                return 2
+            }
             return dueNotes.count + 1
         } else if section == 1 {
             return undueNotes.count + 1
@@ -100,16 +119,19 @@ class ReviewTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let note = getNoteForIndexPath(indexPath) {
-            note.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-            databaseService.save()
-            reload()
+        if indexPath.section == 0 && indexPath.row != 0 {
+            if dueNotes.count != 0 {
+                if let note = getNoteForIndexPath(indexPath) {
+                    note.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                    databaseService.save()
+                    reload()
+                }
+            }
         }
     }
     
     fileprivate func reload() {
         let cat = category
         category = cat
-        tableView.reloadData()
     }
 }

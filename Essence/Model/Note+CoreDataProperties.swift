@@ -24,15 +24,12 @@ extension Note {
     @NSManaged public var lastReviewedDate: Date?
     @NSManaged public var category: Category?
     
-//    func addCategoryObject(value: Category) {
-//        let items = self.mutableSetValue(forKey: "category")
-//        items.add(value)
-//    }
-//    
-//    func removeCategoryObject(value: Category) {
-//        let items = self.mutableSetValue(forKey: "category")
-//        items.remove(value)
-//    }
+    func isDue() -> Bool {
+        if let dueDate = dueDate {
+            return dueDate <= Date()
+        }
+        return false
+    }
 }
 
 extension Note : Identifiable {
