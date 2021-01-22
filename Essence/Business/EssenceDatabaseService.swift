@@ -97,5 +97,17 @@ struct EssenceDatabaseService {
         
         return []
     }
+    
+    func deleteNote(_ note: Note) {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        
+        managedContext.delete(note)
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Error encountered deleting note: \(note)")
+        }
+    }
 }
 

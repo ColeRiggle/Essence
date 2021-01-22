@@ -16,7 +16,9 @@ class ReviewTableController: UITableViewController {
                 dueNotes = databaseService.getDueNotesForCategory(category)
                 undueNotes = databaseService.getUndueNotesForCategory(category)
             }
-            tableView.reloadData()
+            let range = NSMakeRange(0, self.tableView.numberOfSections)
+            let sections = NSIndexSet(indexesIn: range)
+            self.tableView.reloadSections(sections as IndexSet, with: .automatic)
         }
     }
     
@@ -134,4 +136,52 @@ class ReviewTableController: UITableViewController {
         let cat = category
         category = cat
     }
+    
+    
+    fileprivate func canDelete(forRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 1 && indexPath.row != 0
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        var actions: [UIContextualAction] = []
+        
+        if canDelete(forRowAt: indexPath) {
+            let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
+
+                self?.showDeleteWarning(forRowAt: indexPath, success: success)
+
+            })
+            actions.append(modifyAction)
+        }
+        
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    func showDeleteWarning(forRowAt indexPath: IndexPath, success: @escaping ((Bool) -> Void)) {
+        let confirmationAlert = UIAlertController(title: "Delete Note?", message: "This note will be permanently deleted.", preferredStyle: .alert)
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            success(true)
+        }))
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
+            if let self = self {
+                self.tableView(self.tableView, commit: .delete, forRowAt: indexPath)
+            }
+            success(true)
+        }))
+        
+        self.present(confirmationAlert, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let note = getNoteForIndexPath(indexPath) {
+                databaseService.deleteNote(note)
+                reload()
+            }
+        }
+    }
+    
 }
