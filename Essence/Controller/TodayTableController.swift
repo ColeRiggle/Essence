@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TodayTableController: BaseCategoryDisplayController {
+class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, ReviewControllerDelegate {
     
     fileprivate let databaseService = EssenceDatabaseService()
     
@@ -32,6 +32,7 @@ class TodayTableController: BaseCategoryDisplayController {
             if indexPath.row == 0 {
                 let reviewCell = TodayReviewCell()
                 reviewCell.notesDue = databaseService.getDueNotes().count
+                reviewCell.todayReviewDelegate = self
                 cell = reviewCell
             } else if indexPath.row == 1 {
                 let divider = DividerCell()
@@ -71,8 +72,8 @@ class TodayTableController: BaseCategoryDisplayController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
                 return 180.0
             } else {
                 return 50.0
@@ -83,10 +84,29 @@ class TodayTableController: BaseCategoryDisplayController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let reviewController = ReviewTableController()
-        let navController = UINavigationController(rootViewController: reviewController)
+        if indexPath.section == 1 {
+            let reviewController = ReviewTableController()
+            reviewController.category = getCategory(for: indexPath)
+            showReviewTableController(reviewController)
+        }
+    }
+    
+    fileprivate func showReviewTableController(_ controller: ReviewTableController) {
+        controller.reviewControllerDelegate = self
+        let navController = UINavigationController(rootViewController: controller)
         navController.modalPresentationStyle = .overFullScreen
-        reviewController.category = getCategory(for: indexPath)
         present(navController, animated: true)
+    }
+    
+    // MARK: Delegate functions
+    
+    func handleReviewAll() {
+        let reviewController = ReviewTableController()
+        reviewController.category = nil
+        showReviewTableController(reviewController)
+    }
+    
+    func willDisappear() {
+        tableView.reloadData()
     }
 }

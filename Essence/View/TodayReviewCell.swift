@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol TodayReviewDelegate {
+    func handleReviewAll()
+}
+
 class TodayReviewCell: EssenceCell {
+    
+    var todayReviewDelegate: TodayReviewDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -16,12 +22,15 @@ class TodayReviewCell: EssenceCell {
     var notesDue: Int = 0 {
         didSet {
             if notesDue == 1 {
+                reviewAllButton.backgroundColor = .systemBlue
                 notesDueLabel.text = "1 Note Due"
                 reviewAllButton.isEnabled = true
             } else if notesDue == 0 {
+                reviewAllButton.backgroundColor = .systemGray
                 notesDueLabel.text = "No Notes Due"
                 reviewAllButton.isEnabled = false
             } else {
+                reviewAllButton.backgroundColor = .systemBlue
                 notesDueLabel.text = "\(notesDue) Notes Due"
                 reviewAllButton.isEnabled = true
             }
@@ -58,6 +67,8 @@ class TodayReviewCell: EssenceCell {
         
         contentView.addSubview(stackView)
         stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 18, left: 24, bottom: 0, right: 24))
+        
+        reviewAllButton.addTarget(self, action: #selector(handleReviewAll), for: .touchUpInside)
     }
     
     override func layoutSubviews() {
@@ -66,5 +77,9 @@ class TodayReviewCell: EssenceCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleReviewAll() {
+        todayReviewDelegate?.handleReviewAll()
     }
 }

@@ -7,14 +7,25 @@
 
 import UIKit
 
+protocol ReviewControllerDelegate {
+    func willDisappear()
+}
+
 class ReviewTableController: UITableViewController {
     
+    var reviewControllerDelegate: ReviewControllerDelegate?
+    
+    // if category is nill, assume all categories
     var category: Category? {
         didSet {
             if let category = category {
                 navigationItem.title = category.name
                 dueNotes = databaseService.getDueNotesForCategory(category)
                 undueNotes = databaseService.getUndueNotesForCategory(category)
+            } else {
+                navigationItem.title = "Due notes"
+                dueNotes = databaseService.getDueNotes()
+                undueNotes = databaseService.getUndueNotes()
             }
             let range = NSMakeRange(0, self.tableView.numberOfSections)
             let sections = NSIndexSet(indexesIn: range)
@@ -184,4 +195,8 @@ class ReviewTableController: UITableViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        reviewControllerDelegate?.willDisappear()
+    }
 }

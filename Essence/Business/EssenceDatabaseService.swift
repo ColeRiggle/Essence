@@ -36,61 +36,50 @@ struct EssenceDatabaseService {
     }
 
     func getNotesForCategory(_ category: Category) -> [Note] {
-        let managedContext = SceneDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         fetchRequest.includesSubentities = false
         fetchRequest.predicate = NSPredicate(format: "category = %@", category)
         
-        do {
-            return try managedContext.fetch(fetchRequest)
-        } catch {
-            print("Error encountered retrieving notes: \(error)")
-        }
-        
-        return []
+        return getNotes(withFetchRequest: fetchRequest)
     }
     
     func getDueNotesForCategory(_ category: Category) -> [Note] {
-        let managedContext = SceneDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         fetchRequest.includesSubentities = false
         fetchRequest.predicate = NSPredicate(format: "category = %@ AND dueDate <= %@", category, Date() as CVarArg)
         
-        do {
-            return try managedContext.fetch(fetchRequest)
-        } catch {
-            print("Error encountered retrieving notes: \(error)")
-        }
-        
-        return []
+        return getNotes(withFetchRequest: fetchRequest)
     }
     
     func getUndueNotesForCategory(_ category: Category) -> [Note] {
-        let managedContext = SceneDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         fetchRequest.includesSubentities = false
         fetchRequest.predicate = NSPredicate(format: "category = %@ AND dueDate > %@", category, Date() as CVarArg)
         
-        do {
-            return try managedContext.fetch(fetchRequest)
-        } catch {
-            print("Error encountered retrieving notes: \(error)")
-        }
-        
-        return []
+        return getNotes(withFetchRequest: fetchRequest)
     }
     
     func getDueNotes() -> [Note] {
-        let managedContext = SceneDelegate.persistentContainer.viewContext
-        
         let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "dueDate <= %@", Date() as CVarArg)
+
+        return getNotes(withFetchRequest: fetchRequest)
+    }
+    
+    func getUndueNotes() -> [Note] {
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
+        fetchRequest.includesSubentities = false
+        fetchRequest.predicate = NSPredicate(format: "dueDate > %@", Date() as CVarArg)
+
+        return getNotes(withFetchRequest: fetchRequest)
+    }
+    
+    fileprivate func getNotes(withFetchRequest request: NSFetchRequest<Note>) -> [Note] {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
         
         do {
-            return try managedContext.fetch(fetchRequest)
+            return try managedContext.fetch(request)
         } catch {
             print("Error encountered retrieving notes: \(error)")
         }
