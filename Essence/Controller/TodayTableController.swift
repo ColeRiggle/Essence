@@ -43,7 +43,7 @@ class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, 
         } else {
             let todayCategoryCell = TodayCategoryCell()
             if let category = getCategory(for: indexPath) {
-                let notes = databaseService.getNotesForCategory(category)
+                let notes = databaseService.getDueNotesForCategory(category)
                 
                 todayCategoryCell.reviewCount = notes.count
                 todayCategoryCell.name = category.name

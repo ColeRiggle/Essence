@@ -26,6 +26,7 @@ class ReviewTableController: UITableViewController {
                 navigationItem.title = "Due notes"
                 dueNotes = databaseService.getDueNotes()
                 undueNotes = databaseService.getUndueNotes()
+                
             }
             let range = NSMakeRange(0, self.tableView.numberOfSections)
             let sections = NSIndexSet(indexesIn: range)
@@ -38,26 +39,36 @@ class ReviewTableController: UITableViewController {
     
     fileprivate var databaseService = EssenceDatabaseService()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.Application.General.viewBackground
         tableView.separatorStyle = .none
-        
-        
         navigationController?.navigationBar.barStyle = .black
+        
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(handleBack))
+        let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(handleAdd))
+        
         backButton.tintColor = UIColor.Application.General.navigationTint
-        editButton.tintColor = UIColor.Application.General.navigationTint
+        addButton.tintColor = UIColor.Application.General.navigationTint
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = editButton
+        navigationItem.rightBarButtonItem = addButton
     }
     
     @objc fileprivate func handleBack() {
         dismiss(animated: true)
     }
     
-    @objc fileprivate func handleEdit() {
+    @objc fileprivate func handleAdd() {
+        let window = self.view.window!
+        if let tabBarController = window.rootViewController as? UITabBarController {
+            tabBarController.selectedIndex = 1
+            if category != nil {
+                let createController = tabBarController.viewControllers![1] as! CreateController
+                createController.categoryDidChange(title: category?.name ?? "")
+            }
+        }
         dismiss(animated: true)
     }
     
