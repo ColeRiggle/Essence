@@ -38,8 +38,8 @@ class ReviewTableController: UITableViewController {
     fileprivate var undueNotes: [Note] = []
     
     fileprivate var databaseService = EssenceDatabaseService()
-    
-    
+  
+    fileprivate let scheduler = SRScheduler()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +146,7 @@ class ReviewTableController: UITableViewController {
         if indexPath.section == 0 && indexPath.row != 0 {
             if dueNotes.count != 0 {
                 if let note = getNoteForIndexPath(indexPath) {
-                    note.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+                    scheduler.calculateNextDate(note: note)
                     databaseService.save()
                     reload()
                 }

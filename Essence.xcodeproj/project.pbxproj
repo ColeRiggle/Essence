@@ -44,6 +44,7 @@
 		D6F802CF2587EEFC00D393FF /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F802CD2587EEFC00D393FF /* Category+CoreDataClass.swift */; };
 		D6F802D02587EEFC00D393FF /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F802CE2587EEFC00D393FF /* Category+CoreDataProperties.swift */; };
 		D6FCAB292585BC5F00F90F41 /* EssenceTextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceTextInputField.swift */; };
+		D6FDB64A25EDD32E00C3E53C /* SRScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FDB64925EDD32E00C3E53C /* SRScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		D6F802C82587EE6C00D393FF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D6F802CD2587EEFC00D393FF /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D6F802CE2587EEFC00D393FF /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D6FDB64925EDD32E00C3E53C /* SRScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */,
+				D6FDB64925EDD32E00C3E53C /* SRScheduler.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				D6610744256D80030004A5F4 /* TodayCategoryCell.swift in Sources */,
 				D6E0EB5D258AB78100680C9D /* NSFetchedResultsController+SafeObjectAtIndexPath.swift in Sources */,
 				D63F9309254CDB93006249F6 /* AppDelegate.swift in Sources */,
+				D6FDB64A25EDD32E00C3E53C /* SRScheduler.swift in Sources */,
 				D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */,
 				D661074E256D8A9E0004A5F4 /* EssenceCell.swift in Sources */,
 				D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */,

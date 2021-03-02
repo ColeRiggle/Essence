@@ -167,6 +167,7 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         note.setValue(Date(), forKey: "createdDate")
         note.setValue(Date(), forKey: "lastReviewedDate")
         note.setValue(category, forKey: "category")
+        note.setValue(1, forKey: "previousInterval")
         
         do {
             try managedContext.save()

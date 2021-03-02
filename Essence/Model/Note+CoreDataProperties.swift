@@ -23,6 +23,7 @@ extension Note {
     @NSManaged public var createdDate: Date?
     @NSManaged public var lastReviewedDate: Date?
     @NSManaged public var category: Category?
+    @NSManaged public var previousInterval: NSNumber?
     
     func isDue() -> Bool {
         if let dueDate = dueDate {
