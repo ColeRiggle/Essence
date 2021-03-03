@@ -87,6 +87,20 @@ struct EssenceDatabaseService {
         return []
     }
     
+    func resetNote(_ note: Note) {
+        let managedContext = SceneDelegate.persistentContainer.viewContext
+        
+        note.lastReviewedDate = Date()
+        note.previousInterval = 1
+        note.dueDate = Date()
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Error encountered deleting note: \(note)")
+        }
+    }
+    
     func deleteNote(_ note: Note) {
         let managedContext = SceneDelegate.persistentContainer.viewContext
         

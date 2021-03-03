@@ -74,8 +74,10 @@ class ReviewTableController: UITableViewController {
     
     fileprivate func getNoteForIndexPath(_ indexPath: IndexPath) -> Note? {
         if indexPath.section == 0 {
-            return dueNotes[indexPath.row - 1]
-        } else if indexPath.section == 1 {
+            if (!dueNotes.isEmpty) {
+                return dueNotes[indexPath.row - 1]
+            }
+        } else if indexPath.section == 1 && indexPath.row != 0 {
             return undueNotes[indexPath.row - 1]
         }
         
@@ -161,7 +163,7 @@ class ReviewTableController: UITableViewController {
     
     
     fileprivate func canDelete(forRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 1 && indexPath.row != 0
+        return getNoteForIndexPath(indexPath) != nil
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -169,12 +171,19 @@ class ReviewTableController: UITableViewController {
         var actions: [UIContextualAction] = []
         
         if canDelete(forRowAt: indexPath) {
-            let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
+            let deleteAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
 
                 self?.showDeleteWarning(forRowAt: indexPath, success: success)
 
             })
-            actions.append(modifyAction)
+            
+            let resetAction = UIContextualAction(style: .normal, title: "Reset", handler: {
+                [weak self] (contextualAciton, view, success)  in
+                self?.showResetWarning(forRowAt: indexPath, success: success)
+            })
+            
+            actions.append(deleteAction)
+            actions.append(resetAction)
         }
         
         return UISwipeActionsConfiguration(actions: actions)
@@ -190,6 +199,24 @@ class ReviewTableController: UITableViewController {
         confirmationAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
             if let self = self {
                 self.tableView(self.tableView, commit: .delete, forRowAt: indexPath)
+            }
+            success(true)
+        }))
+        
+        self.present(confirmationAlert, animated: true)
+    }
+    
+    func showResetWarning(forRowAt indexPath: IndexPath, success: @escaping ((Bool) -> Void)) {
+        let confirmationAlert = UIAlertController(title: "Reset Note?", message: "This will clear all progress.", preferredStyle: .alert)
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            success(true)
+        }))
+        
+        confirmationAlert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { [weak self] (_) in
+            if let note = self?.getNoteForIndexPath(indexPath) {
+                self?.databaseService.resetNote(note)
+                self?.reload()
             }
             success(true)
         }))
