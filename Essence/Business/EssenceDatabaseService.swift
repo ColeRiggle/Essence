@@ -87,6 +87,12 @@ struct EssenceDatabaseService {
         return []
     }
     
+    func clearCategory(_ category: Category) {
+        getNotesForCategory(category).forEach { (note) in
+            deleteNote(note)
+        }
+    }
+    
     func resetNote(_ note: Note) {
         let managedContext = SceneDelegate.persistentContainer.viewContext
         

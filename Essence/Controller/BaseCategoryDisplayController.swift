@@ -8,21 +8,15 @@
 import UIKit
 import CoreData
 
+protocol BaseCategoryDisplayDelegate {
+    func categoryDeleted(category: Category)
+}
+
 class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsControllerDelegate {
+
+    var baseCategoryDisplayDelegate: BaseCategoryDisplayDelegate?
     
-    // what type of functionality is requred:
-    
-    // - displaying custom cells given a provided category
-    // - displaying other cells in other sections
-    // - handeling clicks of each category
-    
-    // or might be useful:
-    
-    // - provide different ways to sort
-    
-    // how will this work?
-    
-    // Option B: subclass this and override important methods
+    fileprivate let databaseService = EssenceDatabaseService()
     
     lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
@@ -103,7 +97,6 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         if editingStyle == .delete {
             if let sessions = fetchedResultsController.fetchedObjects as [Category]? {
                 fetchedResultsController.managedObjectContext.delete(sessions[indexPath.row])
-                print("Deleting category at index: \(indexPath.row)")
                 do {
                     try fetchedResultsController.managedObjectContext.save()
                 } catch {
@@ -120,9 +113,7 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         
         if canDelete(forRowAt: indexPath) {
             let modifyAction = UIContextualAction(style: .destructive, title:  "Delete", handler: { [weak self] (contextualAction, view, success) in
-
                 self?.showDeleteWarning(forRowAt: indexPath, success: success)
-
             })
             actions.append(modifyAction)
         }
@@ -139,7 +130,12 @@ class BaseCategoryDisplayController: UITableViewController, NSFetchedResultsCont
         
         confirmationAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] (_) in
             if let self = self {
-                self.tableView(self.tableView, commit: .delete, forRowAt: indexPath)
+                if let category = self.getCategory(for: indexPath) {
+                    self.databaseService.clearCategory(category)
+                    self.tableView(self.tableView, commit: .delete, forRowAt: indexPath)
+                    self.baseCategoryDisplayDelegate?.categoryDeleted(category: category)
+                }
+                
             }
             success(true)
         }))

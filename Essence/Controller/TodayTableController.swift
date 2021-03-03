@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, ReviewControllerDelegate {
+class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, ReviewControllerDelegate, BaseCategoryDisplayDelegate {
     
     fileprivate let databaseService = EssenceDatabaseService()
     
@@ -18,6 +18,7 @@ class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, 
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.alwaysBounceVertical = false
+        baseCategoryDisplayDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +108,10 @@ class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, 
     }
     
     func willDisappear() {
+        tableView.reloadData()
+    }
+    
+    func categoryDeleted(category: Category) {
         tableView.reloadData()
     }
 }
