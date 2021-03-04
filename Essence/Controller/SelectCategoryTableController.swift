@@ -23,8 +23,8 @@ class SelectCategoryTableController: BaseCategoryDisplayController {
         super.viewDidLoad()
         tableView.backgroundColor = UIColor.Application.General.viewBackground
         tableView.separatorStyle = .none
-        tableView.allowsSelection = true
         tableView.delegate = self
+        tableView.allowsSelection = true
         tableView.alwaysBounceVertical = false
         navigationController?.navigationBar.barStyle = .black
         navigationItem.setLeftBarButton(UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleDimiss)), animated: false)
