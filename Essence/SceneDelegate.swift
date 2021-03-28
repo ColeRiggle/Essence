@@ -29,6 +29,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let viewController = BaseTabBarController()
         
+//        UINavigationBar.appearance().barTintColor = .black
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().barStyle = .black
+        
         // CoreData setup
         print(SceneDelegate.persistentContainer.name)
         

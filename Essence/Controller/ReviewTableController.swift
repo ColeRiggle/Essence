@@ -45,7 +45,6 @@ class ReviewTableController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.Application.General.viewBackground
         tableView.separatorStyle = .none
-        navigationController?.navigationBar.barStyle = .black
         
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
         let addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(handleAdd))
