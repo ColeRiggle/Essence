@@ -35,7 +35,7 @@
 		D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661077F25702C940004A5F4 /* EssenceTextInputField.swift */; };
 		D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6610784257032FA0004A5F4 /* InsetTextField.swift */; };
 		D661078D257033820004A5F4 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D661078C257033820004A5F4 /* Formatting.swift */; };
-		D67B797225FD90A50018FE3B /* StatsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B797125FD90A50018FE3B /* StatsTableController.swift */; };
+		D665D7B226157628009746F0 /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D665D7B126157628009746F0 /* StatsCell.swift */; };
 		D695FE6D25AE873100D8CC35 /* ReviewTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D695FE6C25AE873100D8CC35 /* ReviewTableController.swift */; };
 		D695FE7225AE87F000D8CC35 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D695FE7125AE87F000D8CC35 /* ReviewCell.swift */; };
 		D6DF643325A8DC8000397D58 /* EssenceDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */; };
@@ -100,7 +100,7 @@
 		D661077F25702C940004A5F4 /* EssenceTextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceTextInputField.swift; sourceTree = "<group>"; };
 		D6610784257032FA0004A5F4 /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		D661078C257033820004A5F4 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
-		D67B797125FD90A50018FE3B /* StatsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTableController.swift; sourceTree = "<group>"; };
+		D665D7B126157628009746F0 /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		D695FE6C25AE873100D8CC35 /* ReviewTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableController.swift; sourceTree = "<group>"; };
 		D695FE7125AE87F000D8CC35 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		D6DF643225A8DC8000397D58 /* EssenceDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssenceDatabaseService.swift; sourceTree = "<group>"; };
@@ -218,6 +218,7 @@
 				D6610772257029800004A5F4 /* CreateCategoryCell.swift */,
 				D661077F25702C940004A5F4 /* EssenceTextInputField.swift */,
 				D695FE7125AE87F000D8CC35 /* ReviewCell.swift */,
+				D665D7B126157628009746F0 /* StatsCell.swift */,
 				D62F251525AF79B700DC9955 /* ReviewsCompleteCell.swift */,
 			);
 			path = View;
@@ -245,7 +246,6 @@
 				D661076025701FDB0004A5F4 /* SelectCategoryTableController.swift */,
 				D6E0EB79258C658900680C9D /* BaseCategoryDisplayController.swift */,
 				D695FE6C25AE873100D8CC35 /* ReviewTableController.swift */,
-				D67B797125FD90A50018FE3B /* StatsTableController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -417,7 +417,6 @@
 				D661078025702C940004A5F4 /* EssenceTextInputField.swift in Sources */,
 				D661074E256D8A9E0004A5F4 /* EssenceCell.swift in Sources */,
 				D6610785257032FA0004A5F4 /* InsetTextField.swift in Sources */,
-				D67B797225FD90A50018FE3B /* StatsTableController.swift in Sources */,
 				D6610773257029800004A5F4 /* CreateCategoryCell.swift in Sources */,
 				D661078D257033820004A5F4 /* Formatting.swift in Sources */,
 				D65702F225A7AE8F00AD5A8E /* Extensions+UIViewController.swift in Sources */,
@@ -428,6 +427,7 @@
 				D6F802D02587EEFC00D393FF /* Category+CoreDataProperties.swift in Sources */,
 				D63F930B254CDB93006249F6 /* SceneDelegate.swift in Sources */,
 				D6610756256D90AE0004A5F4 /* DividerCell.swift in Sources */,
+				D665D7B226157628009746F0 /* StatsCell.swift in Sources */,
 				D63F9343254CDE91006249F6 /* Extensions+UIView.swift in Sources */,
 				D661077B25702C020004A5F4 /* CreateController.swift in Sources */,
 			);

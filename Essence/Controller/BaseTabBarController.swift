@@ -18,8 +18,7 @@ class BaseTabBarController: UITabBarController {
         
         viewControllers = [
             createNavController(viewController: TodayTableController(), title: "Today", image: #imageLiteral(resourceName: "today")),
-            createNavController(viewController: CreateController(), title: "Create", image: #imageLiteral(resourceName: "essence")),
-            createNavController(viewController: UINavigationController(rootViewController: StatsTableController()), title: "Stats", image: #imageLiteral(resourceName: "stats"))
+            createNavController(viewController: CreateController(), title: "Create", image: #imageLiteral(resourceName: "essence"))
         ]
     }
     
