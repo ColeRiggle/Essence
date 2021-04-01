@@ -98,6 +98,10 @@ class CreateController: UIViewController, EssenceInputFieldDelegate, CreateCateg
         canCreate = false
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     // MARK: EssenceTextInputFieldDelegate functions
     
     func textFieldClicked(inputField: EssenceTextInputField, textField: UITextField) {

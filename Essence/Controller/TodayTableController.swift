@@ -26,6 +26,10 @@ class TodayTableController: BaseCategoryDisplayController, TodayReviewDelegate, 
         tableView.reloadData()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = EssenceCell()
         

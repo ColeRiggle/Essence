@@ -9,26 +9,17 @@ import UIKit
 
 extension UINavigationController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? .darkContent
+        return .lightContent
     }
 }
 
 class StatsTableController: UITableViewController {
-    
-    // what types of stats?
-    // total categories
-    // total reviews
-    // oldest review
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //navigationController?.navigationBar.barTintColor = .black
         tableView.backgroundColor = UIColor.Application.General.viewBackground
         configureNavigation()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
     }
     
     fileprivate func configureNavigation() {
