@@ -8,7 +8,7 @@
 [platform-badge]: https://img.shields.io/badge/platform-iOS%2012+-lightgrey.svg
 [platform-url]: https://developer.apple.com/swift
 
-Swift-based iOS application designed to help students optimally determine review intervals for course material utilizing the SuperMemo-2 alogithim.  
+Swift-based iOS application designed to help students optimally determine review intervals for course material utilizing the SuperMemo-2 algorithim.  
 
 ### Screenshots
 ___
