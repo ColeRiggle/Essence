@@ -14,10 +14,10 @@ Swift-based iOS application designed to help students optimally determine review
 ___
 
 <p align="center">
-  <img src="https://github.com/ColeRiggle/Essence/blob/main/a1.png?raw=true" width="220" alt="accessibility text">
-  <img src="https://github.com/ColeRiggle/Essence/blob/main/a4.png?raw=true" width="220" alt="accessibility text">
-  <img src="https://github.com/ColeRiggle/Essence/blob/main/a2.png?raw=true" width="220" alt="accessibility text">
-  <img src="https://github.com/ColeRiggle/Essence/blob/main/a3.png?raw=true" width="220" alt="accessibility text">
+  <img src="https://github.com/ColeRiggle/Essence/blob/main/a1.png?raw=true" width="190" alt="accessibility text">
+  <img src="https://github.com/ColeRiggle/Essence/blob/main/a4.png?raw=true" width="190" alt="accessibility text">
+  <img src="https://github.com/ColeRiggle/Essence/blob/main/a2.png?raw=true" width="190" alt="accessibility text">
+  <img src="https://github.com/ColeRiggle/Essence/blob/main/a3.png?raw=true" width="190" alt="accessibility text">
 </p>
 
 
